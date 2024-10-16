@@ -29,18 +29,37 @@ RegisterNumber:  212223230224
 import pandas as pd
 data = pd.read_csv("Employee.csv")
 print(data.head())
-print(data.info())
-print(data.isnull().sum())
+```
+![image](https://github.com/user-attachments/assets/ca6f285f-9e58-4faa-8aa4-389ee511cbfe)
+
+```
+data.info()
+```
+![image](https://github.com/user-attachments/assets/1944cfd8-e622-47fd-ad8c-0f65560b707e)
+```
+data.isnull().sum()
+```
+![image](https://github.com/user-attachments/assets/899f2bbd-5fc8-40a8-b9bb-13a96c5a8cbe)
+```
 data["left"].value_counts()
+```
+![image](https://github.com/user-attachments/assets/c7509eb0-276f-4887-82cd-a22a1de05370)
+```
 from sklearn.preprocessing import LabelEncoder
-le = LabelEncoder()
-data["salary"] = le.fit_transform(data["salary"])
-print(data.head())
-x=data[["satisfaction_level","last_evaluation","number_project","average_montly_hours","time_spend_company","Work_accident","promotion_last_5years","salary"]]
+le=LabelEncoder()
+data["salary"]=le.fit_transform(data["salary"])
+data.head()
+```
+![image](https://github.com/user-attachments/assets/46c13a68-6fb5-4b7f-a6cd-29c34da70563)
+```
+x=data[["satisfaction_level","last_evaluation","number_project","average_montly_hours","Work_accident","promotion_last_5years","salary"]]
 x.head()
+```
+![image](https://github.com/user-attachments/assets/289121f9-5fb2-4dbe-85b4-155e7bb89ffb)
+```
 y=data["left"]
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=100)
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=1)
 from sklearn.tree import DecisionTreeClassifier
 dt=DecisionTreeClassifier(criterion="entropy")
 dt.fit(x_train,y_train)
@@ -48,13 +67,12 @@ y_pred=dt.predict(x_test)
 from sklearn import metrics
 accuracy=metrics.accuracy_score(y_test,y_pred)
 accuracy
-dt.predict([[0.5,0.8,9,260,6,0,1,2]])
 ```
-
-## Output:
-![image](https://github.com/user-attachments/assets/71940084-1dbe-47c4-ab14-5a75f97e86ad)
-
-![image](https://github.com/user-attachments/assets/07ae9274-d050-4c70-ae5a-66598f1b0990)
+![image](https://github.com/user-attachments/assets/076202d1-66e1-4cdf-bb36-0d808fe492a7)
+```
+dt.predict([[0.5,0.8,9,260,6,0,1,]])
+```
+![image](https://github.com/user-attachments/assets/8306fb49-ddff-4f2f-ac38-cc7d95b0598a)
 
 ## Result:
 Thus the program to implement the  Decision Tree Classifier Model for Predicting Employee Churn is written and verified using python programming.
